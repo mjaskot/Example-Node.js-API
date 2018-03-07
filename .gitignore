@@ -1,2 +1,6 @@
 node_modules
 config/local.js
+
+.idea
+.vscode/*
+!.vscode/launch.json
