@@ -3,11 +3,15 @@ const { planetModel } = require("../../planet.model");
 
 function addComment(id, comment) {
   return planetModel
-    .findByIdAndUpdate(id, {
-      $push: {
-        comments: comment
-      }
-    })
+    .findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          comments: comment
+        }
+      },
+      { new: true }
+    )
     .exec();
 }
 
