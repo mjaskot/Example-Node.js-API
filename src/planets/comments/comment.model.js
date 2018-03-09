@@ -7,6 +7,9 @@ const commentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const commentModel = mongoose.model("comment", commentSchema);
+
 module.exports = {
-  commentSchema
+  commentSchema,
+  commentModel
 };
