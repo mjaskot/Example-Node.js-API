@@ -12,13 +12,12 @@ function removeComment(id, comment) {
 }
 
 async function deleteComment(req, res, next) {
-  const { id } = req.params;
-  const { cid } = req.params;
+  const { id, commentId } = req.params;
   const { _id } = req.body;
 
   try {
     const comment = await removeComment(id, {
-      _id: cid
+      _id: commentId
     });
     return res.status(201).json({ comment: comment });
   } catch (err) {
