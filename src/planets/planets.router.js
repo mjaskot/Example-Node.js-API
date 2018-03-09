@@ -20,6 +20,9 @@ const {
 const {
   validateCreateCommentMiddleware
 } = require("./middlewares/validateCreateComment.middleware");
+const {
+  deleteComment
+} = require("../planets/comments/controllers/removeComment.controller");
 
 const createPlanetRouter = () => {
   const planetRouter = express.Router();
@@ -36,10 +39,13 @@ const createPlanetRouter = () => {
 
   planetRouter
     .route("/planets/:id/comment")
-    .post(validateCreateCommentMiddleware, postComment)
+    .post(validateCreateCommentMiddleware, postComment);
+
+  planetRouter
+    .route("/planets/:id/comment/:cid")
+    .delete(deleteComment)
     .get()
-    .put()
-    .delete();
+    .put();
 
   return planetRouter;
 };
