@@ -13,13 +13,13 @@ const planetSchema = new mongoose.Schema(
     terrain: String,
     surfaceWater: Number,
     population: Number,
-    residents: [],
-    comments: [commentSchema]
+    residents: Array,
+    comments: Array(commentSchema)
   },
   { timestamps: true }
 );
 
-const planetModel = mongoose.model("planets", planetSchema);
+const planetModel = mongoose.model("planet", planetSchema);
 
 module.exports = {
   planetModel
