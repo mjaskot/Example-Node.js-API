@@ -11,10 +11,15 @@ const {
 const {
   updatePlanet
 } = require("../planets/controllers/updatePlanet.controller");
-
 const {
   validateCreatePlanetMiddleware
 } = require("../planets/middlewares/validateCreatePlanet.middleware");
+const {
+  postComment
+} = require("./comments/controllers/postComment.controller");
+const {
+  validateCreateCommentMiddleware
+} = require("./middlewares/validateCreateComment.middleware");
 
 const createPlanetRouter = () => {
   const planetRouter = express.Router();
@@ -31,7 +36,7 @@ const createPlanetRouter = () => {
 
   planetRouter
     .route("/planets/:id/comment")
-    .post()
+    .post(validateCreateCommentMiddleware, postComment)
     .get()
     .put()
     .delete();

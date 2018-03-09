@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 
 const { createDBconnection } = require("./common/database");
 
+process.on("unhandledRejection", function(reason, p) {
+  console.log(reason);
+});
 async function bootstrap() {
   const app = express();
   const { createPlanetRouter } = require("./planets/planets.router");

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const { commentSchema } = require("./comments/comment.model");
+
 const planetSchema = new mongoose.Schema(
   {
     name: String,
@@ -12,7 +14,7 @@ const planetSchema = new mongoose.Schema(
     surfaceWater: Number,
     population: Number,
     residents: [],
-    comments: []
+    comments: [commentSchema]
   },
   { timestamps: true }
 );
