@@ -23,9 +23,14 @@ const {
 const {
   deleteComment
 } = require("../planets/comments/controllers/removeComment.controller");
+const {
+  putCommentController
+} = require("../planets/comments/controllers/updateComment.controller");
 
 const createPlanetRouter = () => {
-  const planetRouter = express.Router();
+  const planetRouter = express.Router(
+    "../planets/comments/controllers/updateComment.controller"
+  );
   planetRouter
     .route("/planets")
     .get(listPlanets)
@@ -42,10 +47,9 @@ const createPlanetRouter = () => {
     .post(validateCreateCommentMiddleware, postComment);
 
   planetRouter
-    .route("/planets/:id/comment/:cid")
+    .route("/planets/:id/comment/:commentId")
     .delete(deleteComment)
-    .get()
-    .put();
+    .put(putCommentController);
 
   return planetRouter;
 };
