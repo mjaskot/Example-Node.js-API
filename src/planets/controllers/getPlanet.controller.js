@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-const axios = require("axios");
 const { planetModel } = require("../planet.model");
 
 function getPlanet(req, res, next) {

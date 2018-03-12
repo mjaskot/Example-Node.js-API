@@ -28,9 +28,8 @@ const {
 } = require("../planets/comments/controllers/updateComment.controller");
 
 const createPlanetRouter = () => {
-  const planetRouter = express.Router(
-    "../planets/comments/controllers/updateComment.controller"
-  );
+  const planetRouter = express.Router();
+
   planetRouter
     .route("/planets")
     .get(listPlanets)

@@ -1,5 +1,3 @@
-const mongoose = require("mongoose");
-const axios = require("axios");
 const { planetModel } = require("../planet.model");
 
 function postPlanet(req, res, next) {
