@@ -1,21 +1,16 @@
 const { planetModel } = require("../planet.model");
 
-function updatePlanet(req, res, next) {
+async function updatePlanet(req, res, next) {
   const id = req.params.id;
-  planetModel.findByIdAndUpdate(
-    id,
-    req.body,
-    (err, planet) => {
-      if (err) {
-        return res.status(500).json({
-          message: "There was an error processing your request",
-          stack: err.stack
-        });
-      }
-      return res.status(200).json(planet);
-    },
-    { new: true }
-  );
+
+  try {
+    const planet = await planetModel
+      .findByIdAndUpdate(id, req.body, { new: true })
+      .exec();
+    return res.status(200).json(planet);
+  } catch (err) {
+    return next(err);
+  }
 }
 
 module.exports = {

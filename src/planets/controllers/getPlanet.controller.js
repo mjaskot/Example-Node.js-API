@@ -1,16 +1,14 @@
 const { planetModel } = require("../planet.model");
 
-function getPlanet(req, res, next) {
+async function getPlanet(req, res, next) {
   const id = req.params.id;
-  planetModel.findOne({ _id: id }, (err, planet) => {
-    if (err) {
-      return res.status(500).json({
-        message: "There was an error processing your request",
-        stack: err.stack
-      });
-    }
+
+  try {
+    const planet = await planetModel.findOne({ _id: id }).exec();
     return res.status(200).json(planet);
-  });
+  } catch (err) {
+    return next(err);
+  }
 }
 
 module.exports = {
