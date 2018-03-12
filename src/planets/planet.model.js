@@ -5,7 +5,7 @@ const { commentSchema } = require("./comments/comment.model");
 const planetSchema = new mongoose.Schema(
   {
     name: String,
-    rotationPeriod: Date,
+    rotationPeriod: Number,
     orbitalPeriod: Number,
     diameter: Number,
     climate: String,

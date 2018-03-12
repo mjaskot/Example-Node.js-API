@@ -9,13 +9,14 @@ process.on("unhandledRejection", function(reason, p) {
 async function bootstrap() {
   const app = express();
   const { createPlanetRouter } = require("./planets/planets.router");
+  const { createUserRouter } = require("./user/user.router");
 
   await createDBconnection();
 
   app.use(bodyParser.json());
   app.use(createPlanetRouter());
-
-  app.listen(3000, () => console.log("Example app listening on port 3000!"));
+  app.use(createUserRouter());
+  app.listen(8000, () => console.log("Example app listening on port 3000!"));
 }
 
 module.exports = {

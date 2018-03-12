@@ -2,30 +2,27 @@ const express = require("express");
 
 const { postPlanet } = require("../planets/controllers/postPlanet.controller");
 const { getPlanet } = require("../planets/controllers/getPlanet.controller");
-const {
-  deletePlanet
-} = require("../planets/controllers/deletePlanet.controller");
-const {
-  listPlanets
-} = require("../planets/controllers/listPlanets.controller");
-const {
-  updatePlanet
-} = require("../planets/controllers/updatePlanet.controller");
-const {
-  validateCreatePlanetMiddleware
-} = require("../planets/middlewares/validateCreatePlanet.middleware");
+const { deletePlanet } = require("./controllers/deletePlanet.controller");
+const { listPlanets } = require("./controllers/listPlanets.controller");
+const { updatePlanet } = require("./controllers/updatePlanet.controller");
 const {
   postComment
 } = require("./comments/controllers/postComment.controller");
 const {
-  validateCreateCommentMiddleware
-} = require("./middlewares/validateCreateComment.middleware");
-const {
   deleteComment
-} = require("../planets/comments/controllers/removeComment.controller");
+} = require("./comments/controllers/removeComment.controller");
 const {
   putCommentController
-} = require("../planets/comments/controllers/updateComment.controller");
+} = require("./comments/controllers/updateComment.controller");
+const {
+  postPlanetValidatorMiddleware
+} = require("./middlewares/postPlanetValidator.middleware");
+const {
+  postCommentValidatorMiddleware
+} = require("./middlewares/postCommentValidator.middleware");
+const {
+  updatePlanetValidatorMiddleware
+} = require("./middlewares/updatePlanetValidator.middleware");
 
 const createPlanetRouter = () => {
   const planetRouter = express.Router();
@@ -33,17 +30,17 @@ const createPlanetRouter = () => {
   planetRouter
     .route("/planets")
     .get(listPlanets)
-    .post(validateCreatePlanetMiddleware, postPlanet);
+    .post(postPlanetValidatorMiddleware(), postPlanet);
 
   planetRouter
     .route("/planets/:id")
     .get(getPlanet)
-    .put(updatePlanet)
+    .put(updatePlanetValidatorMiddleware(), updatePlanet)
     .delete(deletePlanet);
 
   planetRouter
     .route("/planets/:id/comment")
-    .post(validateCreateCommentMiddleware, postComment);
+    .post(postCommentValidatorMiddleware(), postComment);
 
   planetRouter
     .route("/planets/:id/comment/:commentId")
